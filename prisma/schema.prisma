@@ -31,11 +31,11 @@ model Colaborador {
 
 model AreaAtuacaoColaborador {
   id_colaborador  Colaborador @relation(fields: [colaborador_id], references: [id])
-  id_area_atuacao AreaAtuacao  @relation(fields: [areaAtucao_id], references: [id])
+  id_area_atuacao AreaAtuacao  @relation(fields: [areaAtuacao_id], references: [id])
   colaborador_id  Int
-  areaAtucao_id   Int
+  areaAtuacao_id   Int
 
-  @@id([colaborador_id, areaAtucao_id])
+  @@id([colaborador_id, areaAtuacao_id])
   @@map("areaAtuacaoColaborador")
 }
 
