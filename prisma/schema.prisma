@@ -31,7 +31,7 @@ model Colaborador {
 
 model AreaAtuacaoColaborador {
   id_colaborador  Colaborador @relation(fields: [colaborador_id], references: [id])
-  id_area_atuacao AreaAtucao  @relation(fields: [areaAtucao_id], references: [id])
+  id_area_atuacao AreaAtuacao  @relation(fields: [areaAtucao_id], references: [id])
   colaborador_id  Int
   areaAtucao_id   Int
 
@@ -39,7 +39,7 @@ model AreaAtuacaoColaborador {
   @@map("areaAtuacaoColaborador")
 }
 
-model AreaAtucao {
+model AreaAtuacao {
   id                     Int                      @id @default(autoincrement())
   AreaAtuacaoColaborador AreaAtuacaoColaborador[]
   area_atuacao           String

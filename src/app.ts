@@ -1,6 +1,8 @@
 import fastify from "fastify";
-import { appRouter } from "./http/controller/colaborador/router";
+import { routerColaborador } from "./http/controller/colaborador/router";
+import { routerProjeto } from "./http/controller/projeto/router";
 
 export const app = fastify()
 
-app.register(appRouter)
+app.register(routerColaborador)
+app.register(routerProjeto)

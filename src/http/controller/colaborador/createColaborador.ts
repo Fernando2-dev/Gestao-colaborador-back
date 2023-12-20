@@ -3,18 +3,17 @@ import { MakeCreateColaborador } from "@/useCase/fatories/make-create-colaborado
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
-export async function create(request: FastifyRequest, reply: FastifyReply) {
+export async function createColaborador(request: FastifyRequest, reply: FastifyReply) {
 
     const createSchemaData = z.object({
         nome: z.string(),
         idade: z.string(),
         email: z.string().email(),
         senha: z.string().min(6),
-        regimeContratacao: z.enum(['CLT', 'PJ']),
-        areaAtuacao: z.array(z.enum(['FRONTEND', 'BACKEND', 'INFRAESTRUTURA', 'DESIGN', 'REQUISITOS', 'GESTAO']))
+        regime_contratacao: z.enum(['CLT', 'PJ']),
     })
 
-    const { nome, email, areaAtuacao, idade, regimeContratacao, senha } = createSchemaData.parse(request.body)
+    const { nome, email, idade, regime_contratacao, senha } = createSchemaData.parse(request.body)
     const useCaseColaborador =  MakeCreateColaborador()
 
     try{
@@ -23,9 +22,8 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
             idade,
             email,
             senha,
-            regimeContratacao,
-            areaAtuacao
-        })
+            regime_contratacao,
+         })
     } catch(err){
         if (err instanceof EmailExistente) {
             return reply.status(409).send({ message: err.message })

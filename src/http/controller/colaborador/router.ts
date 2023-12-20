@@ -1,6 +1,8 @@
 import { FastifyInstance } from "fastify";
-import { create } from "./create";
+import { createColaborador } from "./createColaborador";
+import { createAreaAtuacao } from "./createAreaAtuacao";
 
-export async function appRouter(app: FastifyInstance){
-app.post('/colaborador', create)
+export async function routerColaborador(app: FastifyInstance) {
+    app.post('/colaborador', createColaborador)
+    app.post('/colaborador/areaAtuacao', createAreaAtuacao)
 }
