@@ -3,6 +3,17 @@ import { ColaboradorRepository } from "../interfaces/colaborador-repository";
 import { prisma } from "@/lib/prisma";
 
 export class PrismaColaboradorRepository implements ColaboradorRepository {
+ 
+  async update(data: Colaborador) {
+    const colaborador = await prisma.colaborador.update({
+      where: {
+        id: data.id
+      },
+      data
+    })
+    return colaborador;
+  }
+
   async findMany() {
     const colaborador = await prisma.colaborador.findMany()
     return colaborador;

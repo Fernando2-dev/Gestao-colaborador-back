@@ -12,7 +12,7 @@ export class ColaboradorCreatedUseCase {
 
     constructor(private colaboradorRepository: ColaboradorRepository) { }
 
-    async execute({ nome, email,  idade, regime_contratacao, senha }: Prisma.ColaboradorCreateInput): Promise<ColaboradorCreatedUseCaseResponse> {
+    async execute({ nome, email, idade, regime_contratacao, senha }: Prisma.ColaboradorCreateInput): Promise<ColaboradorCreatedUseCaseResponse> {
         const verificadorEmail = await this.colaboradorRepository.findByEmail(email);
         
         if (verificadorEmail) {
@@ -26,7 +26,6 @@ export class ColaboradorCreatedUseCase {
             senha,
             regime_contratacao,
         })
-
         return {
             colaborador
         }
