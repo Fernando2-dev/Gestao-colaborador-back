@@ -1,23 +1,37 @@
 #App 
 
-Gympass styles app
+Gestão Colaborador 
 
-##RF ( Requisitoss Funcionais )
-- [] Deve ser possível se cadastrar 
-
- 
  
 ##RN ( Regras de Negócio )
-- [] O usuário não deve poder se cadastraar com um email duplicado;
-- [] O usuário não pode fazer 2 check-in no mesmo dia;
-- [] O usuário não pode fazer check-in se não estiver próximo (100) da academia;
-- [] O Check-in só pode ser validado até 20 minutos após criada;
-- [] O Check-in só pode ser validado por administrador;
-- [] A academia só pode ser cadastrada por admnistrador;
+- [x] Que um Colaborador deva estar associado a um ou mais áreas de atuação (Frontend, Backend,Infraestrutura, Design, Requisitos ou Gestão)
+
+- [x] Que um Colaborador contenha dados que o identifiquem (ex:
+Nome, Idade, regime de contratação, e etc...).
+
+- [] Que o sistema consiga identificar quem é Colaborador Normal e
+quem é Colaborador Gestor.
+
+- [] Considere que um Colaborador seja Gestor, que ele precise
+realizar ações em cima de um Colaborador (como atualizar seus
+dados, remove-lo e entre outras ações...).
+
+- [] Considere que um Colaborador seja Gestor, que ele precise alocar
+um ou mais Colaboradores para um ou mais Projetos.
+
+- [x] Que um Projeto contenha dados que o identifique (ex: Nome,
+Prazo, Descrição, Tecnologias, e etc...).
+
+- []  Considere que um Projeto deva ter no mínimo um Colaborador de
+Gestão, um de Backend e um de Frontend.
+
+- []  É importante entender que um Colaborador Gestão é capaz de ver dados importantes de um Colaborador, como o Regime de Contratação, diferente de um Colaborador Normal, do qual NÃO
+PODE VER estes dados.
+
+- [] É importante entender que um Colaborador Normal não deve realizar nenhuma ação à um outro Colaborador Normal ou Colaborador Gestor, apenas um Colaborador Gestor deve fazer
+isto.
 
 
 ##RNF ( Requisitos não Funconais )
 - [] A senha do usuário precisa estar criptografado
-- [] Os dados da aplicação precisam estar persistidos em um banco de dados PostgreSQL
-- [] Todas listas de dados precisam estar paginadas com 20 itens por página;
 - [] O usuário deve ser indentificado por um jwt 

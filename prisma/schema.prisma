@@ -10,3 +10,49 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum RegimeContratacao {
+  CLT
+  PJ
+}
+
+enum AreaAtuacao {
+  FRONTEND
+  BACKEND
+  INFRAESTRUTURA
+  DESIGN
+  REQUISITOS
+  GESTAO
+}
+
+model Colaborador {
+  id                Int               @id @default(autoincrement())
+  nome              String
+  idade             String            
+  email             String            @unique
+  senha             String
+  regimeContratacao RegimeContratacao
+  areaAtuacao       AreaAtuacao[]
+  id_projetos       Projeto[]
+
+  @@map("colaborador")
+}
+
+model Projeto {
+  id               Int           @id @default(autoincrement())
+  nome             String
+  prazo            String
+  descricao        String?
+  id_tecnologias   Tecnologia[]
+  id_colaboradores Colaborador[]
+
+  @@map("projeto")
+}
+
+model Tecnologia {
+  id_projeto Projeto @relation(fields: [projetoId], references: [id])
+  projetoId  Int
+  tecnologia String
+
+  @@id([projetoId, tecnologia])
+  @@map("tecnologia")
+}
