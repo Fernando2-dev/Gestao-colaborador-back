@@ -1,8 +1,12 @@
-import { Prisma } from "@prisma/client";
+import { AreaAtuacao, Prisma } from "@prisma/client";
 import { AreaAtucaoRepository } from "../interfaces/areaAtucao-repository";
 import { prisma } from "@/lib/prisma";
 
 export class PrismaAreaAtucaoRepository implements AreaAtucaoRepository {
+    findMany(): Promise<AreaAtuacao[]> {
+        const areaAtuacao = prisma.areaAtuacao.findMany()
+        return areaAtuacao
+    }
     async create(data: Prisma.AreaAtuacaoCreateInput) {
         const area = await prisma.areaAtuacao.create({
             data
