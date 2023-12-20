@@ -3,10 +3,21 @@ import { ProjetoRepository } from "../interfaces/projeto-repository";
 import { prisma } from "@/lib/prisma";
 
 export class PrismaProjetoRepository implements ProjetoRepository {
+    async update(data: Projeto) {
+        const projeto = await prisma.projeto.update({
+            where: {
+                id: data.id
+            },
+            data
+        })
+        return projeto
+    }
+
     async findMany(): Promise<Projeto[]> {
         const projeto = await prisma.projeto.findMany()
         return projeto
     }
+    
     async create(data: Prisma.ProjetoCreateInput) {
         const projeto = prisma.projeto.create({
             data

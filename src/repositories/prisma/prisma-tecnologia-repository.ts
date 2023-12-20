@@ -3,6 +3,15 @@ import { prisma } from "@/lib/prisma";
 import { TecnologiaRepository } from "../interfaces/tecnologia-repository";
 
 export class PrismaTecnologiaRepository implements TecnologiaRepository {
+    async update(data: Tecnologia){
+        const tecnologia = prisma.tecnologia.update({
+            where: {
+                id: data.id
+            },
+            data
+        })
+        return tecnologia;
+    }
       async findMany(): Promise<Tecnologia[]> {
            const tecnologia = prisma.tecnologia.findMany()
            return tecnologia
