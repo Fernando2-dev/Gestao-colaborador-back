@@ -4,15 +4,7 @@ Gympass styles app
 
 ##RF ( Requisitoss Funcionais )
 - [] Deve ser possível se cadastrar 
-- [] Deve ser possível se autenticar
-- [] Deve ser possível obter o perfil do usuário logado
-- [] Deve ser possível obter o número de check-ins realizados pelo usuário logado;
-- [] Deve ser possível o usuário obter seu histórico de check-ins
-- [] Deve ser possível o usuário buscar academia próxima
-- [] Deve ser possível o usuário buscar academia pelo nome
-- [] Deve ser possível o usuário realizar check-in em uma academia 
-- [] Deve ser possível o usuário validar o check-in de um usuário
-- [] Deve ser possível cadastrar uma academia;
+
  
  
 ##RN ( Regras de Negócio )
