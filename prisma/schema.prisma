@@ -15,44 +15,63 @@ enum RegimeContratacao {
   PJ
 }
 
-enum AreaAtuacao {
-  FRONTEND
-  BACKEND
-  INFRAESTRUTURA
-  DESIGN
-  REQUISITOS
-  GESTAO
-}
-
 model Colaborador {
-  id                Int               @id @default(autoincrement())
-  nome              String
-  idade             String            
-  email             String            @unique
-  senha             String
-  regimeContratacao RegimeContratacao
-  areaAtuacao       AreaAtuacao[]
-  id_projetos       Projeto[]
+  id                     Int                      @id @default(autoincrement())
+  nome                   String
+  email                  String                   @unique
+  senha                  String
+  idade                  String
+  regime_contratacao     RegimeContratacao
+  AreaAtuacaoColaborador AreaAtuacaoColaborador[]
+  Projeto                Projeto?                 @relation(fields: [projetoId], references: [id])
+  projetoId              Int?
 
   @@map("colaborador")
 }
 
+model AreaAtuacaoColaborador {
+  id_colaborador  Colaborador @relation(fields: [colaborador_id], references: [id])
+  id_area_atuacao AreaAtucao  @relation(fields: [areaAtucao_id], references: [id])
+  colaborador_id  Int
+  areaAtucao_id   Int
+
+  @@id([colaborador_id, areaAtucao_id])
+  @@map("areaAtuacaoColaborador")
+}
+
+model AreaAtucao {
+  id                     Int                      @id @default(autoincrement())
+  AreaAtuacaoColaborador AreaAtuacaoColaborador[]
+  area_atuacao           String
+
+  @@map("areaAtuacao")
+}
+
 model Projeto {
-  id               Int           @id @default(autoincrement())
-  nome             String
-  prazo            String
-  descricao        String?
-  id_tecnologias   Tecnologia[]
-  id_colaboradores Colaborador[]
+  id                Int                 @id @default(autoincrement())
+  nome              String
+  prazo             String
+  descricao         String?
+  id_colaboradores  Colaborador[]
+  ProjetoTecnologia ProjetoTecnologia[]
 
   @@map("projeto")
 }
 
-model Tecnologia {
-  id_projeto Projeto @relation(fields: [projetoId], references: [id])
-  projetoId  Int
-  tecnologia String
+model ProjetoTecnologia {
+  id_tecnologia Tecnologia @relation(fields: [tecnologia_id], references: [id])
+  id_projeto    Projeto    @relation(fields: [projeto_id], references: [id])
+  tecnologia_id  Int
+  projeto_id     Int
 
-  @@id([projetoId, tecnologia])
+   @@id([tecnologia_id, projeto_id])
+  @@map("projetoTecnologia")
+}
+
+model Tecnologia {
+  id                Int                 @id @default(autoincrement())
+  ProjetoTecnologia ProjetoTecnologia[]
+  tenologia String
+
   @@map("tecnologia")
 }
