@@ -27,7 +27,9 @@ export async function createColaboradorAreaAtuacao(request: FastifyRequest, repl
         };
         await useCaseColaboradorAreaAtuacao.execute(input);
     } catch (error) {
-        throw new Error()
+        if (error instanceof Error) {
+            return reply.status(409).send({ message: error.message })
+        }
     }
 
     return reply.status(201).send();

@@ -31,9 +31,9 @@ model Colaborador {
 
 model AreaAtuacaoColaborador {
   id_colaborador  Colaborador @relation(fields: [colaborador_id], references: [id])
-  id_area_atuacao AreaAtuacao  @relation(fields: [areaAtuacao_id], references: [id])
+  id_area_atuacao AreaAtuacao @relation(fields: [areaAtuacao_id], references: [id])
   colaborador_id  Int
-  areaAtuacao_id   Int
+  areaAtuacao_id  Int
 
   @@id([colaborador_id, areaAtuacao_id])
   @@map("areaAtuacaoColaborador")
@@ -61,17 +61,17 @@ model Projeto {
 model ProjetoTecnologia {
   id_tecnologia Tecnologia @relation(fields: [tecnologia_id], references: [id])
   id_projeto    Projeto    @relation(fields: [projeto_id], references: [id])
-  tecnologia_id  Int
-  projeto_id     Int
+  tecnologia_id Int
+  projeto_id    Int
 
-   @@id([tecnologia_id, projeto_id])
+  @@id([tecnologia_id, projeto_id])
   @@map("projetoTecnologia")
 }
 
 model Tecnologia {
   id                Int                 @id @default(autoincrement())
   ProjetoTecnologia ProjetoTecnologia[]
-  tenologia String
+  nome_tecnologia   String
 
   @@map("tecnologia")
 }
