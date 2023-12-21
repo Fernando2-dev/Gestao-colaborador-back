@@ -5,5 +5,6 @@ export interface ColaboradorRepository {
     update(data: Colaborador): Promise<Colaborador>
     delete(id: number): Promise<void>
     findByEmail(email: string): Promise<Colaborador | null>
+    findById(id: number): Promise<Colaborador | null>
     findMany(): Promise<Colaborador[]>
 }

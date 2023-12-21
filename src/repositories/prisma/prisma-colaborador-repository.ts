@@ -3,6 +3,14 @@ import { ColaboradorRepository } from "../interfaces/colaborador-repository";
 import { prisma } from "@/lib/prisma";
 
 export class PrismaColaboradorRepository implements ColaboradorRepository {
+  async findById(id: number) {
+    const colaborador = prisma.colaborador.findUnique({
+      where: {
+        id
+      }
+    })
+    return colaborador;
+  }
   async delete(id: number) {
     await prisma.colaborador.delete({
       where: {
