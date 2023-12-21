@@ -3,6 +3,13 @@ import { ProjetoRepository } from "../interfaces/projeto-repository";
 import { prisma } from "@/lib/prisma";
 
 export class PrismaProjetoRepository implements ProjetoRepository {
+    async delete(id: number): Promise<void> {
+        await prisma.projeto.delete({
+            where: {
+                id
+            }
+        })
+    }
     async update(data: Projeto) {
         const projeto = await prisma.projeto.update({
             where: {
@@ -17,7 +24,7 @@ export class PrismaProjetoRepository implements ProjetoRepository {
         const projeto = await prisma.projeto.findMany()
         return projeto
     }
-    
+
     async create(data: Prisma.ProjetoCreateInput) {
         const projeto = prisma.projeto.create({
             data

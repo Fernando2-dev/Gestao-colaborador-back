@@ -1,7 +1,6 @@
 import { MakeCreateColaboradorAreaAtuacao } from "@/useCase/fatories/make-create-colaboradorAreaAtuacao";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
-import { Prisma } from "@prisma/client";
 
 export async function createColaboradorAreaAtuacao(request: FastifyRequest, reply: FastifyReply) {
     const createSchemaData = z.object({
@@ -13,19 +12,11 @@ export async function createColaboradorAreaAtuacao(request: FastifyRequest, repl
     const useCaseColaboradorAreaAtuacao = MakeCreateColaboradorAreaAtuacao();
 
     try {
-        const input: Prisma.AreaAtuacaoColaboradorCreateInput = {
-            id_colaborador: {
-                connect: {
-                    id: colaborador_id,
-                },
-            },
-            id_area_atuacao: {
-                connect: {
-                    id: areaAtuacao_id,
-                },
-            },
-        };
-        await useCaseColaboradorAreaAtuacao.execute(input);
+        
+        await useCaseColaboradorAreaAtuacao.execute({
+            areaAtuacao_id,
+            colaborador_id
+        });
     } catch (error) {
         if (error instanceof Error) {
             return reply.status(409).send({ message: error.message })

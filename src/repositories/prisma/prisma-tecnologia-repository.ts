@@ -3,7 +3,14 @@ import { prisma } from "@/lib/prisma";
 import { TecnologiaRepository } from "../interfaces/tecnologia-repository";
 
 export class PrismaTecnologiaRepository implements TecnologiaRepository {
-    async update(data: Tecnologia){
+    async delete(id: number): Promise<void> {
+        await prisma.tecnologia.delete({
+            where: {
+                id
+            }
+        })
+    }
+    async update(data: Tecnologia) {
         const tecnologia = prisma.tecnologia.update({
             where: {
                 id: data.id
@@ -12,14 +19,14 @@ export class PrismaTecnologiaRepository implements TecnologiaRepository {
         })
         return tecnologia;
     }
-      async findMany(): Promise<Tecnologia[]> {
-           const tecnologia = prisma.tecnologia.findMany()
-           return tecnologia
-       }
-       async create(data: Prisma.TecnologiaCreateInput){
+    async findMany(): Promise<Tecnologia[]> {
+        const tecnologia = prisma.tecnologia.findMany()
+        return tecnologia
+    }
+    async create(data: Prisma.TecnologiaCreateInput) {
         const tecnologiaCreate = prisma.tecnologia.create({
             data
         })
         return tecnologiaCreate;
-       }
+    }
 }
