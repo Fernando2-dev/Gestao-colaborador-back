@@ -3,6 +3,13 @@ import { AreaAtucaoRepository } from "../interfaces/areaAtucao-repository";
 import { prisma } from "@/lib/prisma";
 
 export class PrismaAreaAtucaoRepository implements AreaAtucaoRepository {
+    async delete(id: number): Promise<void> {
+        await prisma.areaAtuacao.delete({
+            where: {
+                id
+            }
+        })
+    }
     async update(data: AreaAtuacao) {
         const areaAtuacao = prisma.areaAtuacao.update({
             where: {

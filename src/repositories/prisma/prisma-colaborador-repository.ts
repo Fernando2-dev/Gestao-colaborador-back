@@ -3,7 +3,14 @@ import { ColaboradorRepository } from "../interfaces/colaborador-repository";
 import { prisma } from "@/lib/prisma";
 
 export class PrismaColaboradorRepository implements ColaboradorRepository {
- 
+  async delete(id: number) {
+    await prisma.colaborador.delete({
+      where: {
+        id
+      }
+    })
+  }
+
   async update(data: Colaborador) {
     const colaborador = await prisma.colaborador.update({
       where: {
