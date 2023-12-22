@@ -4,6 +4,7 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 export async function Perfil(request: FastifyRequest, reply: FastifyReply) {
     await request.jwtVerify()
     const getUserProfile = MakePerfil()
+    
     const userId = parseInt(request.user.sub);
    
     const { colaborador } = await getUserProfile.execute({
