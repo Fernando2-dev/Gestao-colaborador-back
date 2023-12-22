@@ -1,20 +1,20 @@
+import { MakeCreateColaboradorAreaAtuacao } from "@/useCase/fatories/make-create-colaboradorAreaAtuacao";
 import { MakeProjetoColaborador } from "@/useCase/fatories/make-create-projetoColaborador";
-import { MakeProjetoTecnologia } from "@/useCase/fatories/make-create-projetoTecnologia";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
-export async function createProjetoTecnologia(request: FastifyRequest, reply: FastifyReply) {
+export async function createProjetoColaborador(request: FastifyRequest, reply: FastifyReply) {
     const createSchemaData = z.object({
-        tecnologia_id: z.number(),
+        colaborador_id: z.number(),
         projeto_id: z.number()
     });
 
-    const { tecnologia_id , projeto_id} = createSchemaData.parse(request.body);
-    const useCaseColaboradorAreaAtuacao = MakeProjetoTecnologia();
+    const { colaborador_id , projeto_id} = createSchemaData.parse(request.body);
+    const useCaseColaboradorAreaAtuacao = MakeProjetoColaborador();
     try {
         
         await useCaseColaboradorAreaAtuacao.execute({
-            tecnologia_id,
+            colaborador_id,
             projeto_id 
         });
     } catch (error) {

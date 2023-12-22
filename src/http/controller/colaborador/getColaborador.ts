@@ -7,7 +7,7 @@ export async function getColaborador(request: FastifyRequest, reply: FastifyRepl
       const colaborador = await useCaseColaborador.execute()
        return reply.status(200).send({colaborador})
     } catch(err){
-        return reply.status(500).send()
+        return reply.status(500).send(err)
     }
     
 }

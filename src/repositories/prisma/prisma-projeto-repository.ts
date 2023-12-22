@@ -21,7 +21,20 @@ export class PrismaProjetoRepository implements ProjetoRepository {
     }
 
     async findMany(): Promise<Projeto[]> {
-        const projeto = await prisma.projeto.findMany()
+        const projeto = await prisma.projeto.findMany({
+            include: {
+                ColaboradorProjeto: {
+                    include: {
+                        id_colaborador: true
+                    }
+                },
+                projetoTecnologias:{
+                    include: {
+                        id_tecnologia: true 
+                    }
+                }
+            }
+        })
         return projeto
     }
 

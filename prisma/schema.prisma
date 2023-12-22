@@ -15,16 +15,21 @@ enum RegimeContratacao {
   PJ
 }
 
+enum ROLE {
+  GESTOR
+  MEMBRO
+}
+
 model Colaborador {
-  id                     Int                      @id @default(autoincrement())
-  nome                   String
-  email                  String                   @unique
-  senha                  String
-  idade                  String
-  regime_contratacao     RegimeContratacao
-  AreaAtuacaoColaborador AreaAtuacaoColaborador[]
-  Projeto                Projeto?                 @relation(fields: [projetoId], references: [id])
-  projetoId              Int?
+  id                      Int                      @id @default(autoincrement())
+  nome                    String
+  email                   String                   @unique
+  senha                   String
+  idade                   String
+  role                    ROLE                     @default(MEMBRO)
+  regime_contratacao      RegimeContratacao
+  areasAtuacaoColaborador AreaAtuacaoColaborador[]
+  ColaboradorProjeto      ColaboradorProjeto[]
 
   @@map("colaborador")
 }
@@ -36,7 +41,7 @@ model AreaAtuacaoColaborador {
   areaAtuacao_id  Int
 
   @@id([colaborador_id, areaAtuacao_id])
-  @@map("areaAtuacaoColaborador")
+  @@map("area_atuacao_colaborador")
 }
 
 model AreaAtuacao {
@@ -44,16 +49,26 @@ model AreaAtuacao {
   AreaAtuacaoColaborador AreaAtuacaoColaborador[]
   area_atuacao           String
 
-  @@map("areaAtuacao")
+  @@map("area_atuacao")
+}
+
+model ColaboradorProjeto {
+  id_colaborador Colaborador @relation(fields: [colaborador_id], references: [id])
+  id_projeto     Projeto     @relation(fields: [projeto_id], references: [id])
+  colaborador_id Int
+  projeto_id     Int
+
+  @@id([colaborador_id, projeto_id])
+  @@map("colaborador_projeto")
 }
 
 model Projeto {
-  id                Int                 @id @default(autoincrement())
-  nome              String
-  prazo             String
-  descricao         String?
-  id_colaboradores  Colaborador[]
-  ProjetoTecnologia ProjetoTecnologia[]
+  id                 Int                  @id @default(autoincrement())
+  nome               String
+  prazo              String
+  descricao          String?
+  projetoTecnologias ProjetoTecnologia[]
+  ColaboradorProjeto ColaboradorProjeto[]
 
   @@map("projeto")
 }
@@ -65,7 +80,7 @@ model ProjetoTecnologia {
   projeto_id    Int
 
   @@id([tecnologia_id, projeto_id])
-  @@map("projetoTecnologia")
+  @@map("projeto_tecnologia")
 }
 
 model Tecnologia {

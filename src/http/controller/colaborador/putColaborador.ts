@@ -11,10 +11,10 @@ export async function updateColaborador(request: FastifyRequest, reply: FastifyR
         email: z.string().email(),
         senha: z.string().min(6),
         regime_contratacao: z.enum(['CLT', 'PJ']),
-        projetoId: z.number()
+        role: z.enum(['MEMBRO', 'GESTOR'])
     })
 
-    const { id,nome, email, idade, regime_contratacao, senha, projetoId } = updateSchemaData.parse(request.body)
+    const { id,nome, email, idade, regime_contratacao, senha, role } = updateSchemaData.parse(request.body)
     const useCaseColaborador =  MakeUpdateColaborador()
 
     try{
@@ -25,7 +25,7 @@ export async function updateColaborador(request: FastifyRequest, reply: FastifyR
             email,
             senha,
             regime_contratacao,
-            projetoId
+            role
          })
          return reply.status(200).send(colaborador)
     } catch(err){

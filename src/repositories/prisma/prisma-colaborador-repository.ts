@@ -30,8 +30,22 @@ export class PrismaColaboradorRepository implements ColaboradorRepository {
   }
 
   async findMany() {
-    const colaborador = await prisma.colaborador.findMany()
-    return colaborador;
+    const colaboradores = await prisma.colaborador.findMany({
+      include: {
+        areasAtuacaoColaborador: {
+          include: {
+            id_area_atuacao: true,
+          },
+        },
+         ColaboradorProjeto: {
+          include: {
+            id_projeto: true
+          }
+        }
+      },
+    });
+  
+    return colaboradores;
   }
   async findByEmail(email: string) {
     const user = await prisma.colaborador.findFirst({

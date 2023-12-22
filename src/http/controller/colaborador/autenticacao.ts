@@ -13,26 +13,45 @@ export async function Autenticacao(request: FastifyRequest, reply: FastifyReply)
     const useCaseAutenticacao = MakeAutenticao()
 
     try {
-       const { colaborador } = await useCaseAutenticacao.execute({
+        const { colaborador } = await useCaseAutenticacao.execute({
             email,
             senha
         })
 
-        console.log('ID do colaborador:', colaborador.id);
 
-        const token = await reply.jwtSign({}, {
-          sign: {
-            sub: colaborador.id.toString(),
-          },
-        });   
+        const token = await reply.jwtSign(
+            {
+                role: colaborador.role
+            }, {
+            sign: {
+                sub: colaborador.id.toString(),
+            },
+        });
+        const refreshToken = await reply.jwtSign(
+            {
+                role: colaborador.role
+            }, {
+            sign: {
+                sub: colaborador.id.toString(),
+                expiresIn: '7d',
+            },
+        });
 
-        return reply.status(200).send({token})
+        return reply
+        .setCookie('refreshToken', refreshToken, {
+           path: "/",
+           secure: true,
+           sameSite: true,
+           httpOnly: true  
+        })
+        .status(200)
+        .send({ token })
     } catch (error) {
         if (error instanceof CredenciaisInvalidas) {
             return reply.status(400).send({ message: error.message })
-          }
-          throw error
+        }
+        throw error
     }
-    
-    
+
+
 }

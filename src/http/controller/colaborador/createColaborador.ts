@@ -14,6 +14,7 @@ export async function createColaborador(request: FastifyRequest, reply: FastifyR
     })
 
     const { nome, email, idade, regime_contratacao, senha } = createSchemaData.parse(request.body)
+    
     const useCaseColaborador =  MakeCreateColaborador()
 
     try{
