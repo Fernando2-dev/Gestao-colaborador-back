@@ -1,5 +1,5 @@
-import { $Enums, Colaborador, Prisma } from "@prisma/client";
-import { ColaboradorRepository } from "../interfaces/colaborador-repository";
+import { $Enums,  Prisma } from "@prisma/client";
+import { Colaborador, ColaboradorRepository } from "../interfaces/colaborador-repository";
 import { prisma } from "@/lib/prisma";
 
 export class PrismaColaboradorRepository implements ColaboradorRepository {

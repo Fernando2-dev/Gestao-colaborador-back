@@ -9,27 +9,27 @@ export async function updateColaborador(request: FastifyRequest, reply: FastifyR
         nome: z.string(),
         idade: z.string(),
         email: z.string().email(),
-        senha: z.string().min(6),
         regime_contratacao: z.enum(['CLT', 'PJ']),
-        role: z.enum(['MEMBRO', 'GESTOR'])
-    })
+        role: z.enum(['MEMBRO', 'GESTOR']),
+    });
+    
 
-    const { id,nome, email, idade, regime_contratacao, senha, role } = updateSchemaData.parse(request.body)
-    const useCaseColaborador =  MakeUpdateColaborador()
+    const { id, nome, email, idade, regime_contratacao, role } = updateSchemaData.parse(request.body);
+    const useCaseColaborador =  MakeUpdateColaborador();
 
-    try{
-      const colaborador = await useCaseColaborador.execute({
+    try {
+        const colaborador = await useCaseColaborador.execute({
             id,
             nome, 
             idade,
             email,
-            senha,
             regime_contratacao,
-            role
-         })
-         return reply.status(200).send(colaborador)
-    } catch(err){
-        throw new Error()
+            role,
+        });
+        return reply.status(200).send(colaborador);
+    } catch(err) {
+        console.error(err);
+        return reply.status(500).send({ error: "Internal Server Error" });
     }
     
 }

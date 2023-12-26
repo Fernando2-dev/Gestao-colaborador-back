@@ -5,19 +5,10 @@ export async function getColaborador(request: FastifyRequest, reply: FastifyRepl
     const useCaseColaborador = MakeGetColaborador()
     try {
         const colaboradores = await useCaseColaborador.execute();
-        
-        const colaboradorLista = colaboradores.map(colaborador => {
-            if (colaborador.role === "GESTOR") {
-                return colaborador;
-            } else {
-                const { regime_contratacao, senha, ...colaboradorSemDadosSensiveis } = colaborador;
-                return colaboradorSemDadosSensiveis;
-            }
-        });
-        
-        return reply.status(200).send(colaboradorLista)
+         
+        return reply.status(200).send(colaboradores)
     } catch (err) {
         return reply.status(500).send(err)
     }
-
+    
 }

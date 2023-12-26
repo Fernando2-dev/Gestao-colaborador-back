@@ -18,18 +18,18 @@ export async function routerColaborador(app: FastifyInstance) {
     app.post('/auth', Autenticacao)
     app.get('/colaborador/perfil', Perfil)
 
-    app.post('/colaborador',  { onRequest: [verifyJwt, verifyUserRole('GESTOR')] } ,createColaborador)
-    app.put('/colaborador', { onRequest: [verifyJwt,verifyUserRole('GESTOR')] },updateColaborador)
-    app.delete('/colaborador/:id', { onRequest: [verifyJwt, verifyUserRole('GESTOR')] }, deleteColaborador)
-    app.get('/colaborador',{ onRequest: [verifyJwt] }, getColaborador)
+    app.post('/colaborador', {onRequest: [verifyJwt, verifyUserRole("GESTOR")]}, createColaborador)
+    app.put('/colaborador',{onRequest: [verifyJwt, verifyUserRole("GESTOR")]}, updateColaborador)
+    app.delete('/colaborador/:id', {onRequest: [verifyJwt, verifyUserRole("GESTOR")]}, deleteColaborador)
+    app.get('/colaborador',  getColaborador)
 
     
-    app.post('/colaborador/areaAtuacaoColaborador', { onRequest: [verifyUserRole('GESTOR')] },createColaboradorAreaAtuacao)
+    app.post('/colaborador/areaAtuacaoColaborador', {onRequest: [verifyJwt, verifyUserRole("GESTOR")]}, createColaboradorAreaAtuacao)
     
-    app.post('/colaborador/areaAtuacao', { onRequest: [verifyJwt,verifyUserRole('GESTOR')] } ,createAreaAtuacao)
-    app.get('/colaborador/areaAtuacao', { onRequest: [verifyJwt, verifyUserRole('GESTOR')] },getAreaAtuacao)
-    app.put('/colaborador/areaAtuacao', { onRequest: [verifyJwt, verifyUserRole('GESTOR')] },updateAtuacao)
-    app.delete('/colaborador/areaAtuacao/:id', { onRequest: [verifyJwt, verifyUserRole('GESTOR')] },deleteAreaAtuacao)
+    app.post('/colaborador/areaAtuacao', {onRequest: [verifyJwt, verifyUserRole("GESTOR")]},createAreaAtuacao)
+    app.get('/colaborador/areaAtuacao', {onRequest: [verifyJwt, verifyUserRole("GESTOR")]},getAreaAtuacao)
+    app.put('/colaborador/areaAtuacao', {onRequest: [verifyJwt, verifyUserRole("GESTOR")]},updateAtuacao)
+    app.delete('/colaborador/areaAtuacao/:id', {onRequest: [verifyJwt, verifyUserRole("GESTOR")]},deleteAreaAtuacao)
     
 
 

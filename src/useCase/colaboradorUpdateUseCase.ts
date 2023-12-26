@@ -1,5 +1,4 @@
-import { ColaboradorRepository } from "@/repositories/interfaces/colaborador-repository";
-import { Colaborador} from "@prisma/client";
+import { Colaborador, ColaboradorRepository } from "@/repositories/interfaces/colaborador-repository";
 
 
 
@@ -11,15 +10,14 @@ export class ColaboradorUpdateUseCase {
 
     constructor(private colaboradorRepository: ColaboradorRepository) { }
 
-    async execute({ id, nome, email, idade, regime_contratacao, senha, role }: Colaborador): Promise<ColaboradorUpdateUseCaseResponse> {
+    async execute({ id, nome, email, idade, regime_contratacao, role }: Colaborador): Promise<ColaboradorUpdateUseCaseResponse> {
         const colaborador = await this.colaboradorRepository.update({
             id,
             nome,
             idade,
             email,
-            senha,
             role,
-            regime_contratacao,            
+            regime_contratacao,      
         })
         return {
             colaborador

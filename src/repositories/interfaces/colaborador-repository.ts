@@ -1,13 +1,12 @@
-import { $Enums, Colaborador, Prisma, PrismaClient } from "@prisma/client";
+import { $Enums, Prisma, PrismaClient } from "@prisma/client";
 
-export interface Colaboradores {
+export interface Colaborador {
     id: number;
-    nome: string;
-    email: string;
-    senha?: string;
-    idade: string;
-    role: $Enums.ROLE;
-    regime_contratacao: $Enums.RegimeContratacao
+    nome?: string;
+    email?: string;
+    idade?: string;
+    role?: $Enums.ROLE;
+    regime_contratacao?: $Enums.RegimeContratacao
 }
 
 export interface ColaboradorRepository {
@@ -16,5 +15,5 @@ export interface ColaboradorRepository {
     delete(id: number): Promise<void>
     findByEmail(email: string): Promise<Colaborador | null>
     findById(id: number): Promise<Colaborador | null>
-    findMany(): Promise<Colaboradores[]>
+    findMany(): Promise<Colaborador[]>
 }

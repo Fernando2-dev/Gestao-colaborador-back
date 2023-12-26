@@ -1,5 +1,4 @@
-import { ColaboradorRepository } from "@/repositories/interfaces/colaborador-repository";
-import { Colaborador } from "@prisma/client";
+import { Colaborador, ColaboradorRepository } from "@/repositories/interfaces/colaborador-repository";
 import { CredenciaisInvalidas } from "./error/credenciaisInvalida";
 
 interface PerfilcaoRequest {
