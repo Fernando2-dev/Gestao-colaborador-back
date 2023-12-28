@@ -18,18 +18,18 @@ export async function routerColaborador(app: FastifyInstance) {
     app.post('/auth', Autenticacao)
     app.get('/colaborador/perfil', Perfil)
 
-    app.post('/colaborador', {onRequest: [verifyJwt, verifyUserRole("GESTOR")]}, createColaborador)
-    app.put('/colaborador',{onRequest: [verifyJwt, verifyUserRole("GESTOR")]}, updateColaborador)
-    app.delete('/colaborador/:id', {onRequest: [verifyJwt, verifyUserRole("GESTOR")]}, deleteColaborador)
+    app.post('/colaborador', createColaborador)
+    app.put('/colaborador', updateColaborador)
+    app.delete('/colaborador/:id', deleteColaborador)
     app.get('/colaborador',  getColaborador)
 
     
-    app.post('/colaborador/areaAtuacaoColaborador', {onRequest: [verifyJwt, verifyUserRole("GESTOR")]}, createColaboradorAreaAtuacao)
+    app.post('/colaborador/areaAtuacaoColaborador', createColaboradorAreaAtuacao)
     
-    app.post('/colaborador/areaAtuacao', {onRequest: [verifyJwt, verifyUserRole("GESTOR")]},createAreaAtuacao)
-    app.get('/colaborador/areaAtuacao', {onRequest: [verifyJwt, verifyUserRole("GESTOR")]},getAreaAtuacao)
-    app.put('/colaborador/areaAtuacao', {onRequest: [verifyJwt, verifyUserRole("GESTOR")]},updateAtuacao)
-    app.delete('/colaborador/areaAtuacao/:id', {onRequest: [verifyJwt, verifyUserRole("GESTOR")]},deleteAreaAtuacao)
+    app.post('/colaborador/areaAtuacao',createAreaAtuacao)
+    app.get('/colaborador/areaAtuacao',getAreaAtuacao)
+    app.put('/colaborador/areaAtuacao',updateAtuacao)
+    app.delete('/colaborador/areaAtuacao/:id',deleteAreaAtuacao)
     
 
 

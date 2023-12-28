@@ -2,19 +2,19 @@ import { ColaboradorAreaAtuacaoRepository, IAtuacaoColaborador } from "@/reposit
 import { AreaAtuacaoColaborador, Prisma } from "@prisma/client";
 
 interface ColaboradorAreaAtuacaoResponse {
-    colaboradorAreaAtuacao: AreaAtuacaoColaborador;
+    areasAtuacaoColaborador: AreaAtuacaoColaborador[];
 }
 
 export class ColaboradorAreaAtuacaoUseCase {
     constructor(private colaboradorAreaAtuacao: ColaboradorAreaAtuacaoRepository) { }
 
     async execute({ areaAtuacao_id, colaborador_id }: IAtuacaoColaborador): Promise<ColaboradorAreaAtuacaoResponse> {
-        const colaboradorAreaAtuacao = await this.colaboradorAreaAtuacao.create({
+        const areasAtuacaoColaborador = await this.colaboradorAreaAtuacao.create({
             areaAtuacao_id,
             colaborador_id,
         });
         return {
-            colaboradorAreaAtuacao,
+            areasAtuacaoColaborador,
         };
     }
 }
