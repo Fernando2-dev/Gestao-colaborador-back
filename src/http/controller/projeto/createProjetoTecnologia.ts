@@ -5,18 +5,26 @@ import { z } from "zod";
 
 export async function createProjetoTecnologia(request: FastifyRequest, reply: FastifyReply) {
     const createSchemaData = z.object({
-        tecnologia_id: z.number(),
-        projeto_id: z.number()
+         projetoTecnologia: z.array(
+            z.object({
+                projeto_id: z.number(),
+                tecnologia_id: z.number(),
+            })
+        ),
     });
 
-    const { tecnologia_id , projeto_id} = createSchemaData.parse(request.body);
-    const useCaseColaboradorAreaAtuacao = MakeProjetoTecnologia();
+    const { projetoTecnologia } = createSchemaData.parse(request.body);
+    const useCaseProjetoTecnologia = MakeProjetoTecnologia();
     try {
         
-        await useCaseColaboradorAreaAtuacao.execute({
-            tecnologia_id,
-            projeto_id 
-        });
+        await Promise.all(
+            projetoTecnologia.map(async ({ projeto_id, tecnologia_id }) => {
+                await useCaseProjetoTecnologia.execute({
+                    projeto_id,
+                    tecnologia_id,
+                });
+            })
+        );
     } catch (error) {
         if (error instanceof Error) {
             return reply.status(409).send({ message: error.message })

@@ -10,10 +10,15 @@ import { deleteTecnologia } from "./deleteTecnologia";
 import { verifyJwt } from "../middlewares/verify-jwt";
 import { createProjetoColaborador } from "./createProjetoColaborador";
 import { createProjetoTecnologia } from "./createProjetoTecnologia";
+import { deleteProjetoColaborador } from "./deleteProjetoColaborador";
+import { deleteProjetoTecnologia } from "./deleteProjetoTecnologia";
 
 export async function routerProjeto(app: FastifyInstance) {
     app.post('/projeto/colaborador', createProjetoColaborador)
+    app.delete('/projeto/colaborador', deleteProjetoColaborador)
+
     app.post('/projeto/projetoTecnologia', createProjetoTecnologia)
+    app.delete('/projeto/projetoTecnologia', deleteProjetoTecnologia)
 
     app.post('/projeto', createProjeto)
     app.get('/projeto', getProjeto)

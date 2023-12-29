@@ -3,16 +3,16 @@ import { ITecnologiaProjeto, ProjetoTecnologiaRepository } from "@/repositories/
 import {  ColaboradorProjeto, ProjetoTecnologia} from "@prisma/client";
 
 interface ProjetoTecnologiaResponse {
-    projetoTecnologia: ProjetoTecnologia;
+    projetoTecnologia: ITecnologiaProjeto[];
 }
 
 export class ProjetoTecnologiaUseCase {
-    constructor(private projetoColaboradorRepository: ProjetoTecnologiaRepository) { }
+    constructor(private projetoTecnologiaRepository: ProjetoTecnologiaRepository) { }
 
-    async execute({ projeto_id, tecnologia_id }: ITecnologiaProjeto): Promise<ProjetoTecnologiaResponse> {
-        const projetoTecnologia = await this.projetoColaboradorRepository.create({
-             tecnologia_id,
-            projeto_id,
+    async execute({ tecnologia_id, projeto_id }: ITecnologiaProjeto): Promise<ProjetoTecnologiaResponse> {
+        const projetoTecnologia = await this.projetoTecnologiaRepository.create({
+           projeto_id,
+           tecnologia_id
         });
         return {
             projetoTecnologia,

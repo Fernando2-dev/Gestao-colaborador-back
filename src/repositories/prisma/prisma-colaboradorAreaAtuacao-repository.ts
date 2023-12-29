@@ -2,15 +2,16 @@ import { ColaboradorAreaAtuacaoRepository, IAtuacaoColaborador, IAtuacaoColabora
 import { prisma } from "@/lib/prisma";
 
 export class PrismaColaboradorAreaAtuacaoRepository implements ColaboradorAreaAtuacaoRepository {
+    
     async deleteMany(data: IAtuacaoColaboradorDelete[]): Promise<void> {
-        const whereConditions = data.map(({ colaborador_id, areaAtuacao_id }) => ({
+        const condicoes = data.map(({ colaborador_id, areaAtuacao_id }) => ({
             colaborador_id,
             areaAtuacao_id,
         }));
     
         await prisma.areaAtuacaoColaborador.deleteMany({
             where: {
-                OR: whereConditions,
+                OR: condicoes,
             },
         });
     }
