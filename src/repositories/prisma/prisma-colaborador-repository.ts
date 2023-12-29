@@ -1,5 +1,5 @@
 import { $Enums,  Prisma } from "@prisma/client";
-import { Colaborador, ColaboradorRepository } from "../interfaces/colaborador-repository";
+import {  ColaboradorRepository, IColaborador } from "../interfaces/colaborador-repository";
 import { prisma } from "@/lib/prisma";
 
 export class PrismaColaboradorRepository implements ColaboradorRepository {
@@ -19,7 +19,7 @@ export class PrismaColaboradorRepository implements ColaboradorRepository {
     })
   }
 
-  async update(data: Colaborador) {
+  async update(data: IColaborador) {
     const colaborador = await prisma.colaborador.update({
       where: {
         id: data.id

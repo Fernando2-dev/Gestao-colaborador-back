@@ -21,7 +21,6 @@ export class AutenticacaoUseCase {
         if (!colaborador) {
             throw new EmailSenhaAutenticacao();
         }
-        console.log('Colaborador:', colaborador);
         const compararSenhaColaborador = await compare(senha, colaborador.senha);
         console.log('Comparar Senha:', compararSenhaColaborador);
         if (!compararSenhaColaborador) {

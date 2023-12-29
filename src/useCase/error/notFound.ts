@@ -1,5 +1,5 @@
-export class EmailExistente extends Error{
-    constructor(){
-        super("Not found")
+export class NotFound extends Error{
+    constructor(mensagem: string){
+        super(mensagem)
     }
 }

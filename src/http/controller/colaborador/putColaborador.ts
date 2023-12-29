@@ -1,3 +1,4 @@
+import { NotFound } from "@/useCase/error/notFound";
 import { MakeUpdateColaborador } from "@/useCase/fatories/make-update-colaborador";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
@@ -6,11 +7,12 @@ export async function updateColaborador(request: FastifyRequest, reply: FastifyR
 
     const updateSchemaData = z.object({
         id: z.number(),
-        nome: z.string(),
-        idade: z.string(),
-        email: z.string().email(),
-        regime_contratacao: z.enum(['CLT', 'PJ']),
-        role: z.enum(['MEMBRO', 'GESTOR']),
+        nome: z.string().optional(),
+        idade: z.string().optional(),
+        email: z.string().email().optional(),
+        regime_contratacao: z.enum(['CLT', 'PJ']).optional(),
+        role: z.enum(['MEMBRO', 'GESTOR']).optional(),
+        senha: z.string().optional()
     });
     
 
@@ -18,7 +20,7 @@ export async function updateColaborador(request: FastifyRequest, reply: FastifyR
     const useCaseColaborador =  MakeUpdateColaborador();
 
     try {
-        const colaborador = await useCaseColaborador.execute({
+        await useCaseColaborador.execute({
             id,
             nome, 
             idade,
@@ -26,10 +28,12 @@ export async function updateColaborador(request: FastifyRequest, reply: FastifyR
             regime_contratacao,
             role,
         });
-        return reply.status(200).send(colaborador);
-    } catch(err) {
-        console.error(err);
-        return reply.status(500).send({ error: "Internal Server Error" });
+        return reply.status(200).send();
+    } catch (err) {
+        if (err instanceof NotFound) {
+            return reply.status(404).send({ message: err.message });
+        }
+
+        return reply.status(500).send({ message: 'Erro interno do servidor' });
     }
-    
 }

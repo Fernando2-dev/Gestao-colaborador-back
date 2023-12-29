@@ -12,6 +12,7 @@ import { deleteAreaAtuacao } from "./deleteAreaAtuacao";
 import { Perfil } from "./perfil";
 import { verifyUserRole } from "../middlewares/verify-user-role";
 import { verifyJwt } from "../middlewares/verify-jwt";
+import { deleteColaboradorAreaAtuacao } from "./deleteColaboradorAreaAtuacao";
 
 export async function routerColaborador(app: FastifyInstance) {
     //auth
@@ -25,6 +26,7 @@ export async function routerColaborador(app: FastifyInstance) {
 
     
     app.post('/colaborador/areaAtuacaoColaborador', createColaboradorAreaAtuacao)
+    app.delete('/colaborador/areaAtuacaoColaborador', deleteColaboradorAreaAtuacao)
     
     app.post('/colaborador/areaAtuacao',createAreaAtuacao)
     app.get('/colaborador/areaAtuacao',getAreaAtuacao)

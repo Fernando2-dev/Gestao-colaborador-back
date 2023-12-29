@@ -18,13 +18,14 @@ export async function createColaborador(request: FastifyRequest, reply: FastifyR
     const useCaseColaborador =  MakeCreateColaborador()
 
     try{
-        await useCaseColaborador.execute({
+      const colaborador = await useCaseColaborador.execute({
             nome, 
             idade,
             email,
             senha,
             regime_contratacao,
          })
+         return reply.status(201).send(colaborador)
     } catch(err){
         if (err instanceof EmailExistente) {
             return reply.status(409).send({ message: err.message })
@@ -34,5 +35,5 @@ export async function createColaborador(request: FastifyRequest, reply: FastifyR
     }
     
 
-    return reply.status(201).send()
+   
 }
