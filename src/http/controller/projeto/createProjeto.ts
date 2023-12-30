@@ -15,11 +15,12 @@ export async function createProjeto(request: FastifyRequest, reply: FastifyReply
     const useCaseProjeto = MakeCreateProjeto()
 
     try {
-        await useCaseProjeto.execute({
+        const projeto = await useCaseProjeto.execute({
             nome,
             descricao,
             prazo
         })
+        return reply.status(201).send(projeto)
     } catch (err) {
         if (err instanceof Error) {
             return reply.status(409).send({ message: err.message })
@@ -29,5 +30,5 @@ export async function createProjeto(request: FastifyRequest, reply: FastifyReply
     }
 
 
-    return reply.status(201).send()
+   
 }
