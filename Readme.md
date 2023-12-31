@@ -25,7 +25,7 @@ um ou mais Colaboradores para um ou mais Projetos.
 - [x] Que um Projeto contenha dados que o identifique (ex: Nome,
 Prazo, Descrição, Tecnologias, e etc...).
 
-- []  Considere que um Projeto deva ter no mínimo um Colaborador de
+- [x]  Considere que um Projeto deva ter no mínimo um Colaborador de
 Gestão, um de Backend e um de Frontend.
 
 //Perfil

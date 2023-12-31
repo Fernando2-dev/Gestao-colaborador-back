@@ -18,13 +18,13 @@ export async function Autenticacao(request: FastifyRequest, reply: FastifyReply)
             senha
         })
 
-
         const token = await reply.jwtSign(
             {
                 role: colaborador.role
             }, {
             sign: {
                 sub: colaborador.id.toString(),
+                expiresIn: '1d',
             },
         });
         const refreshToken = await reply.jwtSign(
@@ -52,6 +52,4 @@ export async function Autenticacao(request: FastifyRequest, reply: FastifyReply)
         }
         throw error
     }
-
-
 }
