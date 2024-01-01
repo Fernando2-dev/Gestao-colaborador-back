@@ -12,9 +12,10 @@ export async function createTecnologia(request: FastifyRequest, reply: FastifyRe
     const useCaseTecnologia = MakeCreateTecnologia()
 
     try {
-        await useCaseTecnologia.execute({
+       const tecnologia = await useCaseTecnologia.execute({
             nome_tecnologia,
         })
+        return reply.status(201).send(tecnologia)
     } catch (err) {
         if (err instanceof Error) {
             return reply.status(409).send({ message: err.message })
@@ -22,7 +23,4 @@ export async function createTecnologia(request: FastifyRequest, reply: FastifyRe
 
         throw err
     }
-
-
-    return reply.status(201).send()
 }

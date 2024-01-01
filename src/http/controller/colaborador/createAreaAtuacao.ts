@@ -13,9 +13,10 @@ export async function createAreaAtuacao(request: FastifyRequest, reply: FastifyR
     const useCaseAreaAtucao = MakeCreateAreaAtuacao()
 
     try {
-        await useCaseAreaAtucao.execute({
+       const area = await useCaseAreaAtucao.execute({
             area_atuacao
         })
+        return reply.status(201).send(area)
     } catch (err) {
         if (err instanceof AreaAtuacaoExistente) {
             return reply.status(409).send({ message: err.message })
